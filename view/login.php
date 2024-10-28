@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="form-container">
-        <form action="../controller/login.php" method="post" id="login-form">
+        <form action="login.php" method="post" id="login-form">
             <div class="form-title">
                 <h2>Login</h2>
             </div>
