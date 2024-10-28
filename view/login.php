@@ -1,3 +1,5 @@
+<?php require("../controller/login.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +9,15 @@
 </head>
 <body>
     <div class="form-container">
-        <form action="" method="post" id="login-form">
+        <form action="../controller/login.php" method="post" id="login-form">
             <div class="form-title">
-                <h2>Cadastro</h2>
+                <h2>Login</h2>
             </div>
-            <div id="msg-cadastro" hidden>
-                <p>Usuário já cadastrado!</p>
-            </div>
+            <?php if ($error) : ?>
+                <div style="background: #fafae1; padding: 15px; margin-bottom: 24px;" id="msg-autenticacao">
+                    Usuário não autenticado.
+                </div>
+            <?php endif; ?>
             <div class="container-label">
                 <label for="username">Usuário: </label>
                 <input type="text" name="username" id="username" required>
@@ -22,15 +26,13 @@
                 <label for="password">Senha: </label>
                 <input type="password" name="password" id="password" required>
             </div>
-            <div class="container-label">
-                <label for="password-confirm">Confirme a senha: </label>
-                <input type="password" name="password-confirm" id="password-confirm" required>
+<!--            <div>
+                <button type="button" id="login-button">Entrar</button>
             </div>
+            -->
+            <button>Entra</button>
             <div>
-                <button type="button" id="signup-button">Cadastrar</button>
-            </div>
-            <div>
-                <span>Já possui uma conta?</span>
+                <span>Não possui uma conta?</span>
                 <a href="#">Criar</a>
             </div>
         </form>
