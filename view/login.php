@@ -30,10 +30,10 @@
                 <button type="button" id="login-button">Entrar</button>
             </div>
             -->
-            <button>Entra</button>
+            <button id="login-button">Entra</button>
             <div>
                 <span>Não possui uma conta?</span>
-                <a href="#">Criar</a>
+                <a href="./signup.php">Criar</a>
             </div>
         </form>
     </div>
