@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="form-container">
-        <form action="signup.php" method="post" id="login-form">
+        <form action="signup.php" method="post" id="signup-form">
             <div class="form-title">
                 <h2>Cadastro</h2>
             </div>
@@ -40,7 +40,7 @@
             </div>
             <div>
                 <span>Já possui uma conta?</span>
-                <a href="#">Criar</a>
+                <a href="./login.php">Acessar</a>
             </div>
         </form>
     </div>
