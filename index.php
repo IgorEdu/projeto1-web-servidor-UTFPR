@@ -1,1 +1,3 @@
-<?php require("./view/home.php");
+<?php 
+// require("view/home.php");
+require("controller/checkAuthentication.php");
