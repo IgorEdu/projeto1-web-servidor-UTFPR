@@ -7,15 +7,8 @@
         private $firstName;
         private $lastName;
 
-        function __construct($id, $username, $password, $firstName, $lastName) {
+        function __construct($username, $password, $firstName, $lastName, $id = null) {
             $this->id = $id;
-            $this->username = $username;
-            $this->password = $password;
-            $this->firstName = $firstName;
-            $this->lastName = $lastName;
-        }
-
-        function __construct($username, $password, $firstName, $lastName) {
             $this->username = $username;
             $this->password = $password;
             $this->firstName = $firstName;
