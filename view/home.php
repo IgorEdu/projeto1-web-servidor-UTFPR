@@ -103,7 +103,7 @@ require("../controller/checkAuthentication.php");
             <ul class="list-group">
                 <a class="list-group-item list-group-item-action" href="/view/plane/list-plane.php">Aviões</a>
                 <a class="list-group-item list-group-item-action" href="#">Voos</a>
-                <a class="list-group-item list-group-item-action" href="#">Ocupações</a>
+                <a class="list-group-item list-group-item-action" href="../controller/occupationController.php">Ocupações</a>
             </ul>
         </div>
         <div class="admin-section">
