@@ -84,7 +84,6 @@ require("../controller/checkAuthentication.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-
 <div class="container">
     <div class="header">
         <a href="#"><i class="bi bi-house"></i> Início</a>
