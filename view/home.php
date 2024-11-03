@@ -10,7 +10,12 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <p>X-Airlines</p>
+        <a href="./home.php">Home</a>
+        <a href="../controller/list-plane.php">Aviões</a>
+        <a href="../controller/logout.php">Sair</a>
+    </nav>
     <h1>Teste1</h1>
-    <a href="../controller/logout.php">Sair</a>
 </body>
 </html>
