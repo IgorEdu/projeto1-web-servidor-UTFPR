@@ -1,5 +1,3 @@
-<?php require("../controller/signup.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +7,7 @@
 </head>
 <body>
     <div class="form-container">
-        <form action="signup.php" method="post" id="signup-form">
+        <form action="/signup" method="post" id="signup-form">
             <div class="form-title">
                 <h2>Cadastro</h2>
             </div>
@@ -40,7 +38,7 @@
             </div>
             <div>
                 <span>Já possui uma conta?</span>
-                <a href="./login.php">Acessar</a>
+                <a href="/login">Acessar</a>
             </div>
         </form>
     </div>
