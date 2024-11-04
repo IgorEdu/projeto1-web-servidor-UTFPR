@@ -1,6 +1,6 @@
 <?php
 
-    class Ocupation {
+    class Occupation {
         private $id;
         private $flightCode;
         private $flightDepartureDate;
@@ -15,11 +15,8 @@
             $this->seatNumber = $seatNumber;
         }
 
-        function __construct($flightCode, $flightDepartureDate, $purchaseDate, $seatNumber) {
-            $this->flightCode = $flightCode;
-            $this->flightDepartureDate = $flightDepartureDate;
-            $this->purchaseDate = $purchaseDate;
-            $this->seatNumber = $seatNumber;
+        function getId(){
+            return $this->id;
         }
 
         function getFlightCode(){
@@ -37,5 +34,6 @@
         function getSeatNumber(){
             return $this->seatNumber;
         }
+
     }
 ?>
