@@ -1,6 +1,6 @@
 <?php
 // require("../mock/users-mock.php");
-require_once("../infra/ConnectionDB.php");
+require_once("infra/ConnectionDB.php");
 
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
@@ -36,7 +36,7 @@ function signup($username, $password){
 }
 
 if (!empty($_SESSION['logged']) && $_SESSION['logged']) {
-    header('Location: ../view/home.php');
+    header('Location: /home');
 }
 
 if (!empty($_POST) && userExists($username)) {
@@ -49,5 +49,7 @@ if (!empty($_POST) && userExists($username)) {
 
 
 if(!empty($_POST) && signup($username, $password)){
-    header('Location: ../view/login.php');
+    header('Location: /login');
 }
+
+require_once("views.php");
