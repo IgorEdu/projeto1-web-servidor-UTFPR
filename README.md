@@ -6,8 +6,8 @@ Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR 
 
 - Igor Eduardo da Silva
 
-&#9744; Criar validação de login</br>
-&#9744; Criar página de avião </br>
+&#9745; Criar validação de login</br>
+&#9745; Criar página de avião </br>
 &#9744; Criar mock de avião
 
 - Murilo Vozniaki Correia
@@ -19,6 +19,22 @@ Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR 
 
 - Gabriel Augusto do Nascimento
 
-&#9744; Criar página de tickets</br>
-&#9744; Criar mock de tickets</br>
-&#9744; Criar página home
+&#9745; Criar página de tickets</br>
+&#9745; Criar mock de tickets</br>
+&#9745; Criar página home</br>
+&#9745; Definir padrão de UI
+
+
+## Instalação e uso do projeto
+
+### Ferramentas necessárias
+
+- PHP 8+
+- MySql 8.3.0
+
+### Realizando restauração do banco de dados
+
+```bash
+  mysql -u root -p x-airlines < /infra/mock/dump-x-airlines-202411011534.sql
+```
+
