@@ -83,7 +83,7 @@
 <div class="container">
     <div class="header">
         <a href="#"><i class="bi bi-house"></i> Início</a>
-        <a href="../controller/logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        <a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
     </div>
     <div class="border-top my-4"></div>
     <h1>Bem-vindo à X Airlines,<br>Onde a sua viagem é a nossa prioridade</h1>
