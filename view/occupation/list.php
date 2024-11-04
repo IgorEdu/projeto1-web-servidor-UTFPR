@@ -61,11 +61,11 @@ require ("informationModal.php");
 <div class="container">
     <div class="header">
         <div>
-            <a href="../view/home.php"><i class="bi bi-house"></i> Início </a>
+            <a href="/home"><i class="bi bi-house"></i> Início </a>
             <i class="bi bi-arrow-right-short"></i>
             <a href="./occupationController.php"><i class="bi bi-ticket"></i> Ocupações</a>
         </div>
-        <a href="../../controller/logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
+        <a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
     </div>
 
     <div class="border-top my-3"></div>
