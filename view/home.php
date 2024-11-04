@@ -1,7 +1,3 @@
-<?php
-require("../controller/checkAuthentication.php");
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -101,7 +97,7 @@ require("../controller/checkAuthentication.php");
             <h2>Buscar</h2>
             <div class="border-top my-4"></div>
             <ul class="list-group">
-                <a class="list-group-item list-group-item-action" href="/view/plane/list-plane.php">Aviões</a>
+                <a class="list-group-item list-group-item-action" href="/plane">Aviões</a>
                 <a class="list-group-item list-group-item-action" href="#">Voos</a>
                 <a class="list-group-item list-group-item-action" href="../controller/occupationController.php">Ocupações</a>
             </ul>
