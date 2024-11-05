@@ -8,7 +8,7 @@
         private $destination;
         private $ticketPrice;
 
-        function __construct($id, $code, $departureDate, $departureTime, $destination, $ticketPrice) {
+        function __construct($code, $departureDate, $departureTime, $destination, $ticketPrice, $id = null) {
             $this->id = $id;
             $this->code = $code;
             $this->departureDate = $departureDate;
@@ -17,12 +17,8 @@
             $this->ticketPrice = $ticketPrice;
         }
 
-        function __construct($code, $departureDate, $departureTime, $destination, $ticketPrice) {
-            $this->code = $code;
-            $this->departureDate = $departureDate;
-            $this->departureTime = $departureTime;
-            $this->destination = $destination;
-            $this->ticketPrice = $ticketPrice;
+        function getId(){
+            return $this->id;
         }
 
         function getCode(){
