@@ -48,7 +48,15 @@ Criar banco de dados x-airlines
 
 Alterar usuário e senha do banco de dados em infra/ConnectionDB
 
+Restaurar banco de dados
+
 ```bash
   mysql -u root -p x-airlines < /infra/mock/dump-x-airlines-202411011534.sql;
 ```
 
+### Iniciando PHP
+
+Iniciar servidor do PHP rodando em localhost na porta 8080(sugestão)
+```bash
+  php -S localhost:8080
+```
