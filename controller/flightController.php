@@ -1,11 +1,12 @@
 <?php 
+    require 'controller/checkAuthenticationController.php';
     require_once(__DIR__ . "/../model/flightService.php");
 
-    if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-        echo "Usuário não logado. Redirecionando para login...";
-        header('Location: /login');
-        exit;
-    }
+    // if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
+    //     echo "Usuário não logado. Redirecionando para login...";
+    //     header('Location: /login');
+    //     exit;
+    // }
     
     $flightList = [];
 

@@ -5,6 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-    //alterar para que busque pelas rotas
+    echo "Usuário não logado. Redirecionando para login...";
     header('Location: /login');
 }

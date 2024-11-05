@@ -1,13 +1,13 @@
 <?php
-session_start();
+require 'controller/checkAuthenticationController.php';
 require_once 'entities/Plane.php';
 require_once 'infra/ConnectionDB.php';
 
-if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-    echo "Usuário não logado. Redirecionando para login...";
-    header('Location: /login');
-    exit;
-}
+// if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
+//     echo "Usuário não logado. Redirecionando para login...";
+//     header('Location: /login');
+//     exit;
+// }
 
 $db = ConnectionDB::getInstance();
 $planes = [];
