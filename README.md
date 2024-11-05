@@ -34,7 +34,21 @@ Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR 
 
 ### Realizando restauração do banco de dados
 
+
+Acessar o MySQL
+
 ```bash
-  mysql -u root -p x-airlines < /infra/mock/dump-x-airlines-202411011534.sql
+  mysql -u root -p
+```
+Criar banco de dados x-airlines
+
+```sql
+  CREATE DATABASE `x-airlines`;
+```
+
+Alterar usuário e senha do banco de dados em infra/ConnectionDB
+
+```bash
+  mysql -u root -p x-airlines < /infra/mock/dump-x-airlines-202411011534.sql;
 ```
 
