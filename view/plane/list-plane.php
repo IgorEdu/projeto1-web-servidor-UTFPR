@@ -97,8 +97,8 @@ require("informationModal.php");
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($planes) && is_array($planes)): ?>
-                    <?php foreach ($planes as $plane): ?>
+                <?php if (!empty($planeList) && is_array($planeList)): ?>
+                    <?php foreach ($planeList as $plane): ?>
                         <tr>
                             <td class="uppercase"><?= $plane->getCode() ?></td>
                             <td><?= $plane->getModel() ?></td>

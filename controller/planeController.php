@@ -2,81 +2,93 @@
 require 'controller/checkAuthenticationController.php';
 require_once 'entities/Plane.php';
 require_once 'infra/ConnectionDB.php';
+require_once 'model/planeService.php';
 
-// if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-//     echo "Usuário não logado. Redirecionando para login...";
-//     header('Location: /login');
-//     exit;
-// }
+// $db = ConnectionDB::getInstance();
+$planeList = [];
 
-$db = ConnectionDB::getInstance();
-$planes = [];
 
-// Ações
-if ($acao == 'list') {
+function getAllPlanes(){
 
-    try {
-        $query = $db->prepare("SELECT * FROM planes");
-        $query->execute();
-        $dbplanes = $query->fetchAll(PDO::FETCH_OBJ);
+    $planeList = findPlaneList();
+    return $planeList;
+}
 
-        foreach ($dbplanes as $dbplane) {
-            $planes[] = new Plane($dbplane->code, $dbplane->model, $dbplane->total_seats, $dbplane->id);
-        }
-    } catch (Exception $e) {
-        echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
-    }
+function getPlane($id = null){
+    try{
+        $plane = (object) getPlaneById($id);
 
-} else if ($acao == 'getById') {
-    try {
-        $query = $db->prepare("SELECT * FROM planes WHERE id = :id");
-        $query->bindParam(':id', $_GET['id']);
-        $query->execute();
-        $dbplane = $query->fetch(PDO::FETCH_OBJ);
-
-        $plane = new Plane($dbplane->code, $dbplane->model, $dbplane->total_seats, $dbplane->id);
-
-        if ($dbplane) {
+        if ($plane) {
             // Retorna um array associativo em vez do objeto diretamente
             $response = [
-                "id" => $dbplane->id,
-                "code" => $dbplane->code,
-                "model" => $dbplane->model,
-                "totalSeats" => $dbplane->total_seats
+                "id" => $plane->getId(),
+                "code" => $plane->getCode(),
+                "model" => $plane->getModel(),
+                "totalSeats" => $plane->getTotalSeats()
             ];
             echo json_encode($response);
         } else {
-            echo json_encode(null); // Ocupação não encontrada
+            echo json_encode(null);
         }
-    } catch (Exception $e) {
+    }catch (Exception $e) {
         echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
     }
-} else if ($acao == 'save') {
-    try {
-        if (empty($_POST['id'])) {
-            $query = $db->prepare("INSERT INTO planes(code, model, total_seats) VALUES(:code, :model, :totalSeats)");
-        } else {
-            $query = $db->prepare("UPDATE planes SET code = :code, model = :model, total_seats = :totalSeats WHERE id = :id");
-            $query->bindParam(':id', $_POST['id']);
-        }
-        $query->bindParam(':code', $_POST['code']);
-        $query->bindParam(':model', $_POST['model']);
-        $query->bindParam(':totalSeats', $_POST['totalSeats']);
-        $query->execute();
-        header('Location: /plane/list');
-    } catch (Exception $e) {
-        echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
-    }
-} else if ($acao == 'delete') {
-    try {
-        $query = $db->prepare("DELETE FROM planes WHERE id = :id");
-        $query->bindParam(':id', $_GET['id']);
-        $query->execute();
+}
+
+function addPlane(){
+    try{
+        $code = $_POST['code'];
+        $model = $_POST['model'];
+        $totalSeats = $_POST['totalSeats'];
+
+        $plane = new Plane($code, $model, $totalSeats);
+        insertPlane($plane);
 
         header('Location: /plane/list');
-    } catch (Exception $e) {
+    }catch (Exception $e) {
         echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
+    } 
+}
+
+function editPlane(){
+    try{
+        $id = $_POST['id'];
+        $code = $_POST['code'];
+        $model = $_POST['model'];
+        $totalSeats = $_POST['totalSeats'];
+
+        $plane = new Plane($code, $model, $totalSeats, $id);
+
+        updatePlane($plane);
+
+        header('Location: /plane/list');
+    }catch (Exception $e) {
+        echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
+    } 
+}
+
+function deletePlane(){
+    try{
+        $id = $_GET['id'];
+        deletePlaneById($id);
+        header('Location: /plane/list');
+    }catch (Exception $e) {
+        echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
+    }   
+}
+
+if($acao == 'list'){
+    $planeList = getAllPlanes();
+}else if($acao == 'getById'){
+    getPlane($_GET['id']);
+}else if($acao == 'save'){
+    if (empty($_POST['id'])) {
+        addPlane();
+    } else {
+        editPlane();
     }
+}else if($acao == 'delete'){
+    deletePlane();
 }
 
 require_once 'views.php';
