@@ -51,7 +51,7 @@ Alterar usuário e senha do banco de dados em infra/ConnectionDB
 Restaurar banco de dados
 
 ```bash
-  mysql -u root -p x-airlines < /infra/mock/dump-x-airlines-202411011534.sql;
+  mysql -u root -p x-airlines < /infra/dump-x-airlines-202411011534.sql;
 ```
 
 ### Iniciando PHP
