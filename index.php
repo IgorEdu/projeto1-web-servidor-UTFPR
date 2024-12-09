@@ -129,6 +129,8 @@ Router::get('/occupation/delete/{id}', function ($id) {
     $occupationController->deleteOccupationById($id);
 });
 
+Router::get('/ticketSale', 'SummaryController@getTicketSaleSummary');
+Router::get('/occupationSummary', 'SummaryController@getOcupationSummary');
 
 Router::get('/not-found', function () {
     require 'view/layout/404.php';

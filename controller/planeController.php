@@ -1,12 +1,5 @@
 <?php
-// require 'controller/checkAuthenticationController.php';
-// require_once 'entities/Plane.php';
-// require_once 'infra/ConnectionDB.php';
-// require_once 'model/planeService.php';
 require 'vendor/autoload.php';
-
-
-// $db = ConnectionDB::getInstance();
 
 class PlaneController
 {
@@ -24,8 +17,6 @@ class PlaneController
         $planeList =  PlaneService::findPlaneList();
 
         require_once 'view/plane/list-plane.php';
-
-        // return $planeList;
     }
 
     public function getPlane($id)
@@ -81,10 +72,6 @@ class PlaneController
         }
 
         try {
-            // $code = $_POST['code'];
-            // $model = $_POST['model'];
-            // $totalSeats = $_POST['totalSeats'];
-
             $plane = new Plane($code, $model, $totalSeats);
             PlaneService::insertPlane($plane);
 
@@ -102,11 +89,6 @@ class PlaneController
         }
 
         try {
-            // $id = $_POST['id'];
-            // $code = $_POST['code'];
-            // $model = $_POST['model'];
-            // $totalSeats = $_POST['totalSeats'];
-
             $plane = new Plane($code, $model, $totalSeats, $id);
 
             PlaneService::updatePlane($plane);
@@ -125,27 +107,10 @@ class PlaneController
         }
         
         try {
-            // $id = $_GET['id'];
             PlaneService::deletePlaneById($id);
             header('Location: /plane/list');
         } catch (Exception $e) {
             echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
         }
     }
-
-    // if($acao == 'list'){
-//     $planeList = getAllPlanes();
-// }else if($acao == 'getById'){
-//     getPlane($_GET['id']);
-// }else if($acao == 'save'){
-//     if (empty($_POST['id'])) {
-//         addPlane();
-//     } else {
-//         editPlane();
-//     }
-// }else if($acao == 'delete'){
-//     deletePlane();
-// }
-
-    // require_once 'views.php';
 }

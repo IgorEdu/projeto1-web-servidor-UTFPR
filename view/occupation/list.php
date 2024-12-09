@@ -10,50 +10,7 @@ require ("informationModal.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X Airlines - Ocupações</title>
-    <style>
-        body {
-            background-color: #f0f0f0 !important;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            height: 85vh;
-            width: 80%;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            overflow-y: auto;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 20px;
-        }
-        .header a {
-            margin-left: 5px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        h1 {
-            padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            margin: 10px;
-            font-size: 24px;
-            color: #333;
-        }
-        .uppercase {
-            text-transform: uppercase;
-        }
-    </style>
+    <link rel="stylesheet" href="../../styles/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -92,7 +49,7 @@ require ("informationModal.php");
             <?php foreach ($occupations as $occupation): ?>
                 <tr>
                     <td class="uppercase"><?= $occupation->getFlightCode() ?></td>
-                    <td><?= date('d/m/Y H:i ', strtotime($occupation->getFlightDepartureDate())) ?></td>
+                    <td><?= $occupation->getFlightDepartureDate() ?></td>
                     <td><?= date('d/m/Y', strtotime($occupation->getPurchaseDate())) ?></td>
                     <td><?= $occupation->getSeatNumber() ?></td>
                     <td>

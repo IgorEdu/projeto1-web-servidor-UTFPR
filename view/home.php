@@ -106,8 +106,8 @@
             <h2>Controle</h2>
             <div class="border-top my-4"></div>
             <ul class="list-group">
-                <a class="list-group-item list-group-item-action" href="#">Ocupação de Aeronaves</a>
-                <a class="list-group-item list-group-item-action" href="#">Vendas de Passagem</a>
+                <a class="list-group-item list-group-item-action" href="/occupationSummary">Ocupação de Aeronaves</a>
+                <a class="list-group-item list-group-item-action" href="/ticketSale">Vendas de Passagem</a>
             </ul>
         </div>
     </div>
