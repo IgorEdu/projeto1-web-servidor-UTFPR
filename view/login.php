@@ -63,7 +63,7 @@
         <div class="border-top my-3"></div>
         <div class="form-container">
             <form action="/login" method="post" id="login-form">
-                <?php if ($error): ?>
+                <?php if (isset($error) && $error): ?>
                     <div style="background: #fafae1; padding: 15px; margin-bottom: 24px;" id="msg-autenticacao">
                         Usuário não autenticado.
                     </div>

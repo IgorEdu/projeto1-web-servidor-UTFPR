@@ -7,7 +7,7 @@
         private $purchaseDate;
         private $seatNumber;
 
-        function __construct($id, $flightCode, $flightDepartureDate, $purchaseDate, $seatNumber) {
+        function __construct($flightCode, $flightDepartureDate, $purchaseDate, $seatNumber, $id = null) {
             $this->id = $id;
             $this->flightCode = $flightCode;
             $this->flightDepartureDate = $flightDepartureDate;

@@ -34,4 +34,3 @@ class Plane
         return $this->totalSeats;
     }
 }
-?>

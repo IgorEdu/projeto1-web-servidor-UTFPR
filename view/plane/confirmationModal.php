@@ -10,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" onclick="window.location.href=`/plane/delete/?id=${planeIdToDelete}`">Excluir</button>
+                <button type="button" class="btn btn-danger" onclick="window.location.href=`/plane/delete/${planeIdToDelete}`">Excluir</button>
             </div>
         </div>
     </div>

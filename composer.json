@@ -1,0 +1,21 @@
+{
+    "name": "utfpr/projeto-web-servidor",
+    "authors": [
+        {
+            "name": "Igor",
+            "email": "igoreduardo20101@gmail.com"
+        },
+        {
+            "name": "Murilo Vozniaki Correia"
+        },
+        {
+            "name": "Gabriel Augusto do Nascimento"
+        }
+    ],
+    "autoload": {
+        "classmap": ["./"]
+    },
+    "require": {
+        "pecee/simple-router": "^5.4"
+    }
+}
