@@ -9,8 +9,6 @@ class CheckAuthenticationService
         }
 
         if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-            // echo "Usuário não logado. Redirecionando para login...";
-            // header('Location: /login');
             return false;
         }
 

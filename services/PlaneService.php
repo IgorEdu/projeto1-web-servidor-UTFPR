@@ -1,8 +1,4 @@
 <?php
-// require_once(__DIR__ . "/../entities/flights.php");
-// require_once(__DIR__ . "/../infra/ConnectionDB.php");
-// namespace PlaneService;
-
 require 'vendor/autoload.php';
 
 class PlaneService

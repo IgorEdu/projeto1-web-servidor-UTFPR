@@ -1,6 +1,4 @@
 <?php
-// require_once '../entities/Occupation.php';
-// require_once '../infra/ConnectionDB.php';
 require 'vendor/autoload.php';
 
 class OccupationController
@@ -14,7 +12,29 @@ class OccupationController
             exit();
         }
 
-        $occupations =  OccupationService::findOccupationList();
+        $DBOccupations =  OccupationService::findOccupationList();
+
+        $response = array();
+
+        foreach($DBOccupations as $ocupation){
+
+            $flightInfo = FlightService::getOcupationInfo($ocupation->getFlightId());
+
+            $flightCode = $flightInfo["flightCode"];
+
+            $date = new DateTime($flightInfo["departureDate"]);
+            $flightDepartureDate = $date->format('d/m/Y');
+
+            $response[] = new TableOccupation(
+                $flightCode, 
+                $flightDepartureDate, 
+                $ocupation->getPurchaseDate(), 
+                $ocupation->getSeatNumber(), 
+                $ocupation->getId()
+            );
+        }
+
+        $occupations = $response;
 
         require_once 'view/occupation/list.php';
     }
@@ -29,12 +49,18 @@ class OccupationController
         try {
             $occupation = OccupationService::getOccupationById($id);
 
-            if ($occupation) {
+            if ($occupation !== null) {
                 // Retorna um array associativo em vez do objeto diretamente
+
+                $flightInfo = FlightService::getOcupationInfo($occupation->getFlightId());
+
+                $flightCode = $flightInfo["flightCode"];
+                $flightDepartureDate = $flightInfo["departureDate"];
+
                 $response = [
                     "id" => $occupation->getId(),
-                    "flightCode" => $occupation->getFlightCode(),
-                    "flightDepartureDate" => $occupation->getFlightDepartureDate(),
+                    "flightCode" => $flightCode,
+                    "flightDepartureDate" => $flightDepartureDate,
                     "purchaseDate" => $occupation->getPurchaseDate(),
                     "seatNumber" => $occupation->getSeatNumber()
                 ];
@@ -92,10 +118,6 @@ class OccupationController
             echo json_encode(["error" => "Número do vôo é obrigatório"]);
             return;
         }
-        if (!$flightDepartureDate) {
-            echo json_encode(["error" => "Data de partida é obrigatória"]);
-            return;
-        }
         if (!$purchaseDate) {
             echo json_encode(["error" => "Data de compra é obrigatória"]);
             return;
@@ -106,7 +128,8 @@ class OccupationController
         }
 
         try {
-            $occupation = new Occupation($flightCode, $flightDepartureDate, $purchaseDate, $seatNumber);
+            $flightId = FlightService::getIdByCode($flightCode);
+            $occupation = new Occupation($flightId, $purchaseDate, $seatNumber);
             OccupationService::insertOccupation($occupation);
 
             echo json_encode(['message' => 'Ocupação criada com sucesso']);
@@ -114,19 +137,6 @@ class OccupationController
             echo json_encode(["error" => "Erro ao conectar ou buscar dados: " . $e->getMessage()]);
         }
 
-        // try {
-        //     header('Content-Type: application/json');
-        //     $db = ConnectionDB::getInstance();
-        //     $query = $db->prepare("INSERT INTO occupations (flight_code, flight_departure_date, purchase_date, seat_number) VALUES (:flightCode, :flightDepartureDate, :purchaseDate, :seatNumber)");
-        //     $query->bindParam(':flightCode', $flightCode, PDO::PARAM_STR);
-        //     $query->bindParam(':flightDepartureDate', $flightDepartureDate, PDO::PARAM_STR);
-        //     $query->bindParam(':purchaseDate', $purchaseDate, PDO::PARAM_STR);
-        //     $query->bindParam(':seatNumber', $seatNumber, PDO::PARAM_STR);
-        //     $query->execute();
-        //     echo json_encode(["success" => "Ocupação cadastrada com sucesso!"]);
-        // } catch (Exception $e) {
-        //     echo json_encode(["error" => "Erro ao conectar ou buscar dados: " . $e->getMessage()]);
-        // }
     }
 
     function updateOccupation($id, $flightCode, $flightDepartureDate, $purchaseDate, $seatNumber)
@@ -136,10 +146,6 @@ class OccupationController
             exit();
         }
 
-        if (!$flightDepartureDate) {
-            echo json_encode(["error" => "Data de partida é obrigatória"]);
-            return;
-        }
         if (!$purchaseDate) {
             echo json_encode(["error" => "Data de compra é obrigatória"]);
             return;
@@ -150,28 +156,14 @@ class OccupationController
         }
 
         try {
-            $occupation = new Occupation($flightCode, $flightDepartureDate, $purchaseDate, $seatNumber, $id);
+            $flightId = FlightService::getIdByCode($flightCode);
+            $occupation = new Occupation($flightId, $purchaseDate, $seatNumber, $id);
 
             OccupationService::updateOccupation($occupation);
             echo json_encode(['message' => 'Ocupação atualizada com sucesso']);
         } catch (Exception $e) {
             echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
         }
-
-        // try {
-        //     header('Content-Type: application/json');
-        //     $db = ConnectionDB::getInstance();
-        //     $query = $db->prepare("UPDATE occupations SET flight_code = :flightCode, flight_departure_date = :flightDepartureDate, purchase_date = :purchaseDate, seat_number = :seatNumber WHERE id = :id");
-        //     $query->bindParam(':id', $id, PDO::PARAM_INT);
-        //     $query->bindParam(':flightCode', $flightCode, PDO::PARAM_STR);
-        //     $query->bindParam(':flightDepartureDate', $flightDepartureDate, PDO::PARAM_STR);
-        //     $query->bindParam(':purchaseDate', $purchaseDate, PDO::PARAM_STR);
-        //     $query->bindParam(':seatNumber', $seatNumber, PDO::PARAM_STR);
-        //     $query->execute();
-        //     echo json_encode(["success" => "Ocupação atualizada com sucesso!"]);
-        // } catch (Exception $e) {
-        //     echo json_encode(["error" => "Erro ao conectar ou buscar dados: " . $e->getMessage()]);
-        // }
     }
 
     function validateFlight($code)
@@ -183,32 +175,4 @@ class OccupationController
     {
         echo OccupationService::validateSeat( $flightCode,$seatNumber, $id);
     }
-
-    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     if (isset($_POST['id'])) {
-//         updateOccupation($_POST['id'], $_POST['flightCode'], $_POST['flightDepartureDate'], $_POST['purchaseDate'], $_POST['seatNumber']);
-//     } else {
-//         insertOccupation($_POST['flightCode'], $_POST['flightDepartureDate'], $_POST['purchaseDate'], $_POST['seatNumber']);
-//     }
-//     exit;
-// }
-
-    // if (isset($_GET['action'])) {
-//     if ($_GET['action'] == 'getOccupationById' && isset($_GET['id'])) {
-//         getOccupationById($_GET['id']);
-//         exit;
-//     } elseif ($_GET['action'] == 'deleteOccupation' && isset($_GET['id'])) {
-//         deleteOccupationById($_GET['id']);
-//         exit;
-//     } elseif ($_GET['action'] == 'validateFlight' && isset($_GET['code'])) {
-//         validateFlight($_GET['code']);
-//         exit;
-//     } elseif ($_GET['action'] == 'validateSeat' && isset($_GET['seatNumber']) && isset($_GET['flightCode'])) {
-//         validateSeat($_GET['seatNumber'], $_GET['flightCode']);
-//         exit;
-//     }
-// }
-
-    // include '../view/occupation/list.php';
-
 }

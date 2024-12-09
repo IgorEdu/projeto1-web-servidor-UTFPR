@@ -15,8 +15,7 @@ class OccupationService
 
             foreach ($dboccupations as $dboccupation) {
                 $occupations[] = new Occupation(
-                    $dboccupation->flight_code,
-                    $dboccupation->flight_departure_date,
+                    $dboccupation->flight_id,
                     $dboccupation->purchase_date,
                     $dboccupation->seat_number,
                     $dboccupation->id
@@ -38,8 +37,7 @@ class OccupationService
         $dboccupation = $query->fetch(PDO::FETCH_OBJ);
 
         $occupation = new Occupation(
-            $dboccupation->flight_code,
-            $dboccupation->flight_departure_date,
+            $dboccupation->flight_id,
             $dboccupation->purchase_date,
             $dboccupation->seat_number,
             $dboccupation->id
@@ -50,16 +48,14 @@ class OccupationService
 
     public static function insertOccupation(&$occupation)
     {
-        $flightCode = $occupation->getFlightCode();
-        $flightDepartureDate = $occupation->getFlightDepartureDate();
+        $flightId = $occupation->getFlightId();
         $purchaseDate = $occupation->getPurchaseDate();
         $seatNumber = $occupation->getSeatNumber();
 
         $db = ConnectionDB::getInstance();
 
-        $query = $db->prepare("INSERT INTO occupations (flight_code, flight_departure_date, purchase_date, seat_number) VALUES (:flightCode, :flightDepartureDate, :purchaseDate, :seatNumber)");
-        $query->bindParam(':flightCode', $flightCode, PDO::PARAM_STR);
-        $query->bindParam(':flightDepartureDate', $flightDepartureDate, PDO::PARAM_STR);
+        $query = $db->prepare("INSERT INTO occupations (flight_id, purchase_date, seat_number) VALUES (:flightId, :purchaseDate, :seatNumber)");
+        $query->bindParam(':flightId', $flightId, PDO::PARAM_STR);
         $query->bindParam(':purchaseDate', $purchaseDate, PDO::PARAM_STR);
         $query->bindParam(':seatNumber', $seatNumber, PDO::PARAM_STR);
         $query->execute();
@@ -68,16 +64,14 @@ class OccupationService
     public static function updateOccupation(&$occupation)
     {
         $id = $occupation->getId();
-        $flightCode = $occupation->getFlightCode();
-        $flightDepartureDate = $occupation->getFlightDepartureDate();
+        $flightId = $occupation->getFlightId();
         $purchaseDate = $occupation->getPurchaseDate();
         $seatNumber = $occupation->getSeatNumber();
 
         $db = ConnectionDB::getInstance();
-        $query = $db->prepare("UPDATE occupations SET flight_code = :flightCode, flight_departure_date = :flightDepartureDate, purchase_date = :purchaseDate, seat_number = :seatNumber WHERE id = :id");
+        $query = $db->prepare("UPDATE occupations SET flight_id = :flightId, purchase_date = :purchaseDate, seat_number = :seatNumber WHERE id = :id");
         $query->bindParam(':id', $id, PDO::PARAM_INT);
-        $query->bindParam(':flightCode', $flightCode, PDO::PARAM_STR);
-        $query->bindParam(':flightDepartureDate', $flightDepartureDate, PDO::PARAM_STR);
+        $query->bindParam(':flightId', $flightId, PDO::PARAM_STR);
         $query->bindParam(':purchaseDate', $purchaseDate, PDO::PARAM_STR);
         $query->bindParam(':seatNumber', $seatNumber, PDO::PARAM_STR);
         $query->execute();

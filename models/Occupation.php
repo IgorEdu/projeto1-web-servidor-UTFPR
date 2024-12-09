@@ -2,15 +2,13 @@
 
     class Occupation {
         private $id;
-        private $flightCode;
-        private $flightDepartureDate;
+        private $flightId;
         private $purchaseDate;
         private $seatNumber;
 
-        function __construct($flightCode, $flightDepartureDate, $purchaseDate, $seatNumber, $id = null) {
+        function __construct($flightId, $purchaseDate, $seatNumber, $id = null) {
             $this->id = $id;
-            $this->flightCode = $flightCode;
-            $this->flightDepartureDate = $flightDepartureDate;
+            $this->flightId = $flightId;
             $this->purchaseDate = $purchaseDate;
             $this->seatNumber = $seatNumber;
         }
@@ -19,12 +17,8 @@
             return $this->id;
         }
 
-        function getFlightCode(){
-            return $this->flightCode;
-        }
-
-        function getFlightDepartureDate(){
-            return $this->flightDepartureDate;
+        public function getFlightId(){
+            return $this->flightId;
         }
 
         function getPurchaseDate(){

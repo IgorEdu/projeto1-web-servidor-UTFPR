@@ -1,8 +1,4 @@
 <?php
-    // namespace FlightService;
-
-    // require_once(__DIR__ . "/../entities/flights.php");
-    // require_once(__DIR__ . "/../infra/ConnectionDB.php");
     require "vendor/autoload.php";
 
 
@@ -36,6 +32,31 @@ class FlightService{
         $flight = new Flight($dbFlight->code, $dbFlight->departure_date, $dbFlight->departure_time, $dbFlight->destination, $dbFlight->ticket_price, $dbFlight->id);
 
         return $flight;
+    }
+
+    public static function getIdByCode($code){
+        $db = ConnectionDB::getInstance();
+        $query = $db->prepare("SELECT id FROM flights WHERE code = :code");
+        $query->bindParam(':code', $code);
+        $query->execute();
+        $dbResult = $query->fetch(PDO::FETCH_OBJ);
+
+        return $dbResult->id;
+    }
+
+    public static function getOcupationInfo($id){
+        $db = ConnectionDB::getInstance();
+        $query = $db->prepare("SELECT code, departure_date FROM flights WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        $dbResult = $query->fetch(PDO::FETCH_OBJ);
+
+        $response = [
+            "flightCode" => $dbResult->code,
+            "departureDate" => $dbResult->departure_date
+        ];
+
+        return $response;
     }
 
     public static function insertFlight(&$flight){

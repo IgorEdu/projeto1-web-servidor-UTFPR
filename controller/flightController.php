@@ -1,14 +1,7 @@
 <?php 
-// require 'controller/checkAuthenticationController.php';
-// require_once(__DIR__ . "/../model/flightService.php");
 require 'vendor/autoload.php';
 
 class FlightController{
-    // if (empty($_SESSION['logged']) || !$_SESSION['logged']) {
-    //     echo "Usuário não logado. Redirecionando para login...";
-    //     header('Location: /login');
-    //     exit;
-    // }
     
     private array $flightList = array();
 
@@ -29,7 +22,6 @@ class FlightController{
         }
 
         try{
-            // $flight = (object) getFlightById($id);
             $flight = FlightService::getFlightById($id);
 
             if ($flight) {
@@ -76,12 +68,6 @@ class FlightController{
         }
 
         try{
-            // $code = $_POST['code'];
-            // $departureDate = $_POST['departureDate'];
-            // $departureTime = $_POST['departureTime'];
-            // $destination = $_POST['destination'];
-            // $ticketPrice = $_POST['ticketPrice'];
-
             $flight = new Flight($code, $departureDate, $departureTime, $destination, $ticketPrice);
 
             FlightService::insertFlight($flight);
@@ -99,12 +85,6 @@ class FlightController{
         }
         
         try{
-            // $id = $_POST['id'];
-            // $code = $_POST['code'];
-            // $departureDate = $_POST['departureDate'];
-            // $departureTime = $_POST['departureTime'];
-            // $destination = $_POST['destination'];
-            // $ticketPrice = $_POST['ticketPrice'];
 
             $flight = new Flight($code, $departureDate, $departureTime, $destination, $ticketPrice, $id);
 
@@ -114,8 +94,6 @@ class FlightController{
         }catch (Exception $e) {
             echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
         } 
-
-        // require_once (__DIR__ . '/../views.php');
     }
 
     function deleteFlight($id){
@@ -125,29 +103,11 @@ class FlightController{
         }
         
         try{
-            // $id = $_GET['id'];
             FlightService::deleteFlightById($id);
             header('Location: /flight/list');
         }catch (Exception $e) {
             echo "Erro ao conectar ou buscar dados: " . $e->getMessage();
         }   
-
-        // require_once (__DIR__ . '/../views.php');
     }
 
-    // if($acao == 'list'){
-    //     $flightList = getAllFlights();
-    // }else if($acao == 'getById'){
-    //     getFlight($_GET['id']);
-    // }else if($acao == 'save'){
-    //     if (empty($_POST['id'])) {
-    //         addFlight();
-    //     } else {
-    //         editFlight();
-    //     }
-    // }else if($acao == 'delete'){
-    //     deleteFlight();
-    // }
-
-    // require_once (__DIR__ . '/../views.php');
 }

@@ -49,7 +49,7 @@ require ("informationModal.php");
             <?php foreach ($occupations as $occupation): ?>
                 <tr>
                     <td class="uppercase"><?= $occupation->getFlightCode() ?></td>
-                    <td><?= date('d/m/Y H:i ', strtotime($occupation->getFlightDepartureDate())) ?></td>
+                    <td><?= $occupation->getFlightDepartureDate() ?></td>
                     <td><?= date('d/m/Y', strtotime($occupation->getPurchaseDate())) ?></td>
                     <td><?= $occupation->getSeatNumber() ?></td>
                     <td>

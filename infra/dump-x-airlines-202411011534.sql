@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `planes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `planes` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(100) NOT NULL,
+  `code` varchar(100) NOT NULL UNIQUE,
   `model` varchar(100) DEFAULT NULL,
   `total_seats` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -84,42 +84,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 --
--- Table structure for table `occupations`
---
-
-DROP TABLE IF EXISTS `occupations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `occupations` (
-                               `id` int(11) NOT NULL AUTO_INCREMENT,
-                               `flight_code` varchar(10) NOT NULL,
-                               `flight_departure_date` datetime NOT NULL,
-                               `purchase_date` datetime NOT NULL,
-                               `seat_number` varchar(5) NOT NULL,
-                               PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `occupations`
---
-
-LOCK TABLES `occupations` WRITE;
-/*!40000 ALTER TABLE `occupations` DISABLE KEYS */;
-INSERT INTO `occupations` VALUES (25,'FL123','2024-11-01 10:00:00','2024-10-25 00:00:00','12A'),(26,'FL124','2024-11-02 11:00:00','2024-10-26 00:00:00','14B'),(27,'FL125','2024-11-03 14:00:00','2024-10-27 00:00:00','16C'),(28,'FL126','2024-11-04 16:00:00','2024-10-28 00:00:00','18D'),(29,'FL127','2024-11-05 18:00:00','2024-10-29 00:00:00','20E'),(30,'FL123','2024-11-01 10:00:00','2024-11-03 20:44:00','12B');
-/*!40000 ALTER TABLE `occupations` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
---
 -- Table structure for table `flights`
 --
 
@@ -128,7 +92,7 @@ DROP TABLE IF EXISTS `flights`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `flights` (
                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                           `code` varchar(10) NOT NULL,
+                           `code` varchar(10) NOT NULL UNIQUE,
                            `departure_date` date NOT NULL,
                            `departure_time` time NOT NULL,
                            `destination` varchar(100) NOT NULL,
@@ -143,8 +107,55 @@ CREATE TABLE `flights` (
 
 LOCK TABLES `flights` WRITE;
 /*!40000 ALTER TABLE `flights` DISABLE KEYS */;
-INSERT INTO `flights` VALUES (2,'FL123','2024-11-01','10:00:00','New York',350.00),(3,'FL124','2024-11-02','12:00:00','Los Angeles',400.00),(4,'FL125','2024-11-03','14:00:00','Chicago',300.00),(5,'FL126','2024-11-04','16:00:00','Houston',450.00),(6,'FL127','2024-11-05','18:00:00','Miami',500.00);
+INSERT INTO `flights` 
+VALUES (2,'FL123','2024-11-01','10:00:00','New York',350.00),
+(3,'FL124','2024-11-02','12:00:00','Los Angeles',400.00),
+(4,'FL125','2024-11-03','14:00:00','Chicago',300.00),
+(5,'FL126','2024-11-04','16:00:00','Houston',450.00),
+(6,'FL127','2024-11-05','18:00:00','Miami',500.00);
 /*!40000 ALTER TABLE `flights` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+--
+-- Table structure for table `occupations`
+--
+
+DROP TABLE IF EXISTS `occupations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `occupations` (
+                               `id` int(11) NOT NULL AUTO_INCREMENT,
+                               `flight_id` int(11) NOT NULL,
+                               `purchase_date` datetime NOT NULL,
+                               `seat_number` varchar(5) NOT NULL,
+                               PRIMARY KEY (`id`),
+                               FOREIGN KEY (`flight_id`) REFERENCES flights(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `occupations`
+--
+
+LOCK TABLES `occupations` WRITE;
+/*!40000 ALTER TABLE `occupations` DISABLE KEYS */;
+INSERT INTO `occupations` 
+VALUES (25, 2,'2024-10-25 00:00:00','12A'),
+(26, 3,'2024-10-26 00:00:00','14B'),
+(27, 4,'2024-10-27 00:00:00','16C'),
+(28, 5,'2024-10-28 00:00:00','18D'),
+(29, 6,'2024-10-29 00:00:00','20E'),
+(30, 2,'2024-11-03 20:44:00','12B');
+/*!40000 ALTER TABLE `occupations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
