@@ -38,7 +38,7 @@
 <script>
 
     function openModal(id) {
-        fetch(`/plane/getById/?id=${id}`)
+        fetch(`/plane/${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {

@@ -99,7 +99,7 @@
             <ul class="list-group">
                 <a class="list-group-item list-group-item-action" href="/plane">Aviões</a>
                 <a class="list-group-item list-group-item-action" href="/flight">Voos</a>
-                <a class="list-group-item list-group-item-action" href="../controller/occupationController.php">Ocupações</a>
+                <a class="list-group-item list-group-item-action" href="/occupation">Ocupações</a>
             </ul>
         </div>
         <div class="admin-section">

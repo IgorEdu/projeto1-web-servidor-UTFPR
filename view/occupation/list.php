@@ -63,7 +63,7 @@ require ("informationModal.php");
         <div>
             <a href="/home"><i class="bi bi-house"></i> Início </a>
             <i class="bi bi-arrow-right-short"></i>
-            <a href="./occupationController.php"><i class="bi bi-ticket"></i> Ocupações</a>
+            <a href="/occupation"><i class="bi bi-ticket"></i> Ocupações</a>
         </div>
         <a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a>
     </div>

@@ -1,18 +1,22 @@
-<div class="modal fade" id="flightModal" tabindex="-1" aria-labelledby="flightModalLabel" aria-hidden="true" style="z-index: 1051;">
+<div class="modal fade" id="flightModal" tabindex="-1" aria-labelledby="flightModalLabel" aria-hidden="true"
+    style="z-index: 1051;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="flightModalLabel">Ocupação</h5>
-                <button type="button" onclick="clean()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" onclick="clean()" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
-            <div class="error-message" style="border-radius: 5px; background-color: indianred; color: black; text-align: center; padding: 5px; display: none; justify-content: center; align-items: center; margin: 1vh;">
-                </div>
+            <div class="error-message"
+                style="border-radius: 5px; background-color: indianred; color: black; text-align: center; padding: 5px; display: none; justify-content: center; align-items: center; margin: 1vh;">
+            </div>
             <div class="modal-body">
-                <form id="flightForm">
+                <form id="flightForm" action="/occupation/save" method="POST">
                     <input type="hidden" id="flightId" value="" />
                     <div class="mb-3">
                         <label for="flightCode" class="form-label">Número do Vôo</label>
-                        <input type="text" class="form-control uppercase" id="flightCode" required onfocus="savePreviousValueFlightCode()" onchange="validateFlight()">
+                        <input type="text" class="form-control uppercase" id="flightCode" required
+                            onfocus="savePreviousValueFlightCode()" onchange="validateFlight()">
                     </div>
                     <div class="mb-3">
                         <label for="flightDate" class="form-label">Data do Vôo</label>
@@ -20,11 +24,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="flightPurchaseDate" class="form-label">Data da Compra</label>
-                        <input type="datetime-local" class="form-control" id="flightPurchaseDate" value="<?php echo date('Y-m-d\TH:i');?>" required disabled>
+                        <input type="datetime-local" class="form-control" id="flightPurchaseDate"
+                            value="<?php echo date('Y-m-d\TH:i'); ?>" required disabled>
                     </div>
                     <div class="mb-3">
                         <label for="seatNumber" class="form-label">Número do Assento</label>
-                        <input type="text" class="form-control" onfocus="savePreviousValueSeatNumber()" onchange="validateSeat()" id="seatNumber" required>
+                        <input type="text" class="form-control" onfocus="savePreviousValueSeatNumber()"
+                            onchange="validateSeat()" id="seatNumber" required>
                     </div>
                 </form>
             </div>
@@ -39,7 +45,7 @@
 <script>
 
     function openModal(id) {
-        fetch(`../../controller/occupationController.php?action=getOccupationById&id=${id}`)
+        fetch(`/occupation/${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {
@@ -93,7 +99,7 @@
             })
         };
 
-        fetch(`../../controller/occupationController.php?action=${id ? 'updateOccupation' : 'insertOccupation'}`, options)
+        fetch(`occupation/save`, options)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {
@@ -109,6 +115,47 @@
             });
     }
 
+    // function saveFlight() {
+    //     let flightCode = document.getElementById('flightCode').value;
+    //     let flightDate = document.getElementById('flightDate').value;
+    //     let flightPurchaseDate = document.getElementById('flightPurchaseDate').value;
+    //     let seatNumber = document.getElementById('seatNumber').value;
+    //     let id = document.getElementById('flightId').value;
+
+    //     const data = {
+    //         flightCode: flightCode,
+    //         flightDepartureDate: flightDate,
+    //         purchaseDate: flightPurchaseDate,
+    //         seatNumber: seatNumber
+    //     };
+
+    //     const options = {
+    //         method: id ? 'POST' : 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         },
+    //         body: new URLSearchParams({
+    //             ...data,
+    //             ...(id && { id })
+    //         })
+    //     };
+
+    //     fetch(`../../controller/occupationController.php?action=${id ? 'updateOccupation' : 'insertOccupation'}`, options)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data && !data.error) {
+    //                 localStorage.setItem('showInformationModal', 'true');
+    //                 location.reload();
+    //             } else {
+    //                 showError(data.error || 'Ocorreu um erro ao salvar a ocupação.');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Erro:', error);
+    //             showError('Ocorreu um erro ao salvar a ocupação.');
+    //         });
+    // }
+
 
     function setCurrentDateTime() {
         const now = new Date(); // Obtém a data e hora atuais
@@ -122,7 +169,7 @@
         // Formata a data no padrão yyyy-MM-ddThh:mm
         const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-        return  formattedDateTime;
+        return formattedDateTime;
     }
 
     let previousValueFlightCode = '';
@@ -139,7 +186,7 @@
     function validateFlight() {
 
         let flightCode = document.getElementById('flightCode').value;
-        fetch(`../../controller/occupationController.php?action=validateFlight&code=${flightCode}`)
+        fetch(`occupation/validateFlight/${flightCode}`)
             .then(response => response.json())
             .then(data => {
 
@@ -167,7 +214,7 @@
         console.log(id);
         let seatNumber = document.getElementById('seatNumber').value;
         let flightCode = document.getElementById('flightCode').value;
-        fetch(`../../controller/occupationController.php?action=validateSeat&seatNumber=${seatNumber}&flightCode=${flightCode}&id=${id}`)
+        fetch(`occupation/validateSeat/${flightCode}/${seatNumber}/${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {
@@ -186,7 +233,7 @@
     }
 
     function deleteOccupation() {
-        fetch(`../../controller/occupationController.php?action=deleteOccupation&id=${occupationIdToDelete}`)
+        fetch(`/occupation/delete/${occupationIdToDelete}`)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {
@@ -199,7 +246,7 @@
             .catch(error => console.error('Erro:', error));
     }
 
-    function showError (message) {
+    function showError(message) {
         if (!message) {
             document.getElementsByClassName('error-message')[0].style.display = 'none';
             return;

@@ -45,7 +45,7 @@ style="z-index: 1051;">
 <script>
 
     function openModal(id) {
-        fetch(`/flight/getById/?id=${id}`)
+        fetch(`/flight/${id}`)
             .then(response => response.json())
             .then(data => {
                 if (data && !data.error) {

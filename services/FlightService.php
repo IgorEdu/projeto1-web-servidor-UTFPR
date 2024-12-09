@@ -1,8 +1,13 @@
 <?php
-    require_once(__DIR__ . "/../entities/flights.php");
-    require_once(__DIR__ . "/../infra/ConnectionDB.php");
+    // namespace FlightService;
 
-    function findFlightList(){
+    // require_once(__DIR__ . "/../entities/flights.php");
+    // require_once(__DIR__ . "/../infra/ConnectionDB.php");
+    require "vendor/autoload.php";
+
+
+class FlightService{
+    public static function findFlightList(){
         try {
             $db = ConnectionDB::getInstance();
             $query = $db->prepare("SELECT * FROM flights");
@@ -21,7 +26,7 @@
         }
     }
 
-    function getFlightById($id){
+    public static function getFlightById($id){
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("SELECT * FROM flights WHERE id = :id");
         $query->bindParam(':id', $id);
@@ -33,7 +38,7 @@
         return $flight;
     }
 
-    function insertFlight(&$flight){
+    public static function insertFlight(&$flight){
 
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("INSERT INTO flights(code, departure_date, departure_time, destination, ticket_price) VALUES(:code, :departureDate, :departureTime, :destination, :ticketPrice)");
@@ -45,7 +50,7 @@
         $query->execute();
     }
 
-    function updateFlight(&$flight){
+    public static function updateFlight(&$flight){
 
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("UPDATE flights SET code = :code, departure_date = :departureDate, departure_time = :departureTime, destination = :destination, ticket_price = :ticketPrice WHERE id = :id");
@@ -58,10 +63,11 @@
         $query->execute();
     }
 
-    function deleteFlightById($id){
+    public static function deleteFlightById($id){
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("DELETE FROM flights WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
     }
     
+}

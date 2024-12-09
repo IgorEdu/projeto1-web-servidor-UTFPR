@@ -1,8 +1,14 @@
 <?php
-    require_once(__DIR__ . "/../entities/flights.php");
-    require_once(__DIR__ . "/../infra/ConnectionDB.php");
+// require_once(__DIR__ . "/../entities/flights.php");
+// require_once(__DIR__ . "/../infra/ConnectionDB.php");
+// namespace PlaneService;
 
-    function findPlaneList(){
+require 'vendor/autoload.php';
+
+class PlaneService
+{
+    public static function findPlaneList()
+    {
         try {
             $db = ConnectionDB::getInstance();
             $query = $db->prepare("SELECT * FROM planes");
@@ -10,7 +16,7 @@
             $dbPlaneList = $query->fetchAll(PDO::FETCH_OBJ);
 
             $planeList = array();
-    
+
             foreach ($dbPlaneList as $dbPlane) {
                 $planeList[] = new Plane($dbPlane->code, $dbPlane->model, $dbPlane->total_seats, $dbPlane->id);
             }
@@ -21,7 +27,8 @@
         }
     }
 
-    function getPlaneById($id){
+    public static function getPlaneById($id)
+    {
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("SELECT * FROM planes WHERE id = :id");
         $query->bindParam(':id', $id);
@@ -33,7 +40,8 @@
         return $plane;
     }
 
-    function insertPlane(&$plane){
+    public static function insertPlane(&$plane)
+    {
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("INSERT INTO planes(code, model, total_seats) VALUES(:code, :model, :totalSeats)");
         $query->bindParam(':code', $plane->getCode());
@@ -42,10 +50,11 @@
         $query->execute();
     }
 
-    function updatePlane(&$plane){
+    public static function updatePlane(&$plane)
+    {
 
         $db = ConnectionDB::getInstance();
-        
+
         $query = $db->prepare("UPDATE planes SET code = :code, model = :model, total_seats = :totalSeats WHERE id = :id");
         $query->bindParam(':id', $plane->getId());
         $query->bindParam(':code', $plane->getCode());
@@ -54,10 +63,12 @@
         $query->execute();
     }
 
-    function deletePlaneById($id){
+    public static function deletePlaneById($id)
+    {
         $db = ConnectionDB::getInstance();
         $query = $db->prepare("DELETE FROM planes WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
     }
-    
+
+}

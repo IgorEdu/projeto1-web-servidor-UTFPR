@@ -1,5 +1,4 @@
 <?php
-
     class Flight {
         private $id;
         private $code;
