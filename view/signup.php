@@ -2,55 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X Airlines - Cadastro</title>
-    <style>
-        body {
-            background-color: #f0f0f0 !important;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            height: 85vh;
-            width: 80%;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            overflow-y: auto;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 20px;
-        }
-
-        .header a {
-            margin-left: 5px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-
-        h1 {
-            padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            margin: 10px;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-    </style>
+    <link rel="stylesheet" href="../../styles/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -70,15 +22,15 @@
                 <?php endif; ?>
                 <div class="container-label">
                     <label for="username">Usuário: </label>
-                    <input type="text" name="username" id="username" required>
+                    <input type="text" name="username" id="username" class="form-control" required>
                 </div>
                 <div class="container-label">
                     <label for="password">Senha: </label>
-                    <input type="password" name="password" id="password" required>
+                    <input type="password" name="password" id="password" class="form-control" required>
                 </div>
                 <div class="container-label">
                     <label for="password-confirm">Confirme a senha: </label>
-                    <input type="password" name="password-confirm" id="password-confirm" required>
+                    <input type="password" name="password-confirm" id="password-confirm" class="form-control" required>
                 </div>
                 <?php if ($error): ?>
                     <div style="background: #fafae1; padding: 15px; margin-bottom: 24px;" id="msg-cadastro">
