@@ -1,4 +1,4 @@
-# Projeto 1 - Web-Servidor
+# Projeto 2 - Web-Servidor
 
 Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR utilizando PHP
 
@@ -8,21 +8,23 @@ Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR 
 
 &#9745; Criar validação de login</br>
 &#9745; Criar página de avião </br>
-&#9744; Criar mock de avião
+&#9745; Criar página de relatório de vendas </br>
+&#9745; Recriado controle de rotas utilizando Pecee SimpleRouter </br>
 
 - Murilo Vozniaki Correia
 
 &#9745; Inicialização de arquitetura MVC</br>
 &#9745; Criar entidades</br>
-&#9744; Criar página de vôo</br>
-&#9744; Criar mock de vôos
+&#9745; Criar página de vôo</br>
+&#9745; Criar página controle de ocupações</br>
+&#9745; Refatoração do banco de dados</br>
 
 - Gabriel Augusto do Nascimento
 
 &#9745; Criar página de tickets</br>
-&#9745; Criar mock de tickets</br>
 &#9745; Criar página home</br>
-&#9745; Definir padrão de UI
+&#9745; Definir padrão de UI</br>
+&#9745; Estilização do projeto</br>
 
 
 ## Instalação e uso do projeto
@@ -31,6 +33,7 @@ Repositório referente à entrega do projeto 1 da disciplina web-servidor UTFPR 
 
 - PHP 8+
 - MySql 8.3.0
+- Composer
 
 ### Realizando restauração do banco de dados
 
@@ -52,6 +55,19 @@ Restaurar banco de dados
 
 ```bash
   mysql -u root -p x-airlines < /infra/dump-x-airlines-202411011534.sql;
+```
+
+### Instalando dependências
+
+Realizar a instalação das dependências usando o Composer
+
+```bash
+  composer install
+```
+
+Criar as arquivos do autoload
+```bash
+  composer dump-autoload
 ```
 
 ### Iniciando PHP
