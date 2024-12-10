@@ -35,12 +35,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($planeList) && is_array($planeList)): ?>
-                    <?php foreach ($planeList as $plane): ?>
+                <?php if (!empty($occupationSummary) && is_array($occupationSummary)): ?>
+                    <?php foreach ($occupationSummary as $summary): ?>
                         <tr>
-                            <td class="uppercase"><?= $plane->getCode() ?></td>
-                            <td><?= $plane->getModel() ?></td>
-                            <td><?= $plane->getTotalSeats() ?></td>
+                            <td class="uppercase"><?= $summary->getMonth() ?></td>
+                            <td><?= $summary->getSoldTickets() ?></td>
+                            <td><?= $summary->getTotalSum() ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

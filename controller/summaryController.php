@@ -9,6 +9,13 @@ class SummaryController{
 
     function getTicketSaleSummary(){
 
+        if (!CheckAuthenticationService::isLogged()){
+            require_once 'view/login.php';
+            exit();
+        }
+
+        $occupationSummary = SummaryService::getTicketSaleSummary();
+
         require_once 'view/summary/ticketSaleSummary.view.php';
     }
 
